@@ -21,19 +21,15 @@ func failOnError(err error, message string) {
 }
 
 func main (){
-/*// Set custom env variable
-	os.Setenv("username", "XYZ")
-	os.Setenv("password", "ABC")
-	os.Setenv("host", "DNS")
-	os.Setenv("port", "NO")
+// Set custom env variable
 	var username = os.Getenv("username")
 	var password = os.Getenv("password")
 	var host = os.Getenv("host")
-	var port = os.Getenv("port") */
+	var port = os.Getenv("port")
 
 	// Create session
-	client, err := amqp.Dial("amqps://"+"b-4ec445dd-e496-4f5b-95ed-416d1b391e00-1.mq.us-west-2.amazonaws.com"+":"+"5671",
-		amqp.ConnSASLPlain("cfr5BQa5UXzM", "q0NkN4lxeOB8S0vNJFYh"),
+	client, err := amqp.Dial("amqps://"+host+":"+port,
+		amqp.ConnSASLPlain(username, password),
 	)
 	if err != nil {
 		fmt.Println(fmt.Sprintf("Dialing AMQP server:", err))
